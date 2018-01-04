@@ -1,0 +1,48 @@
+Creating a VPC with public and private subnets:
+
+1) Choose VPC and choose start VPC wizard.
+2) Select  VPC with private and public subnet.
+3) In next step specify the public and private subnet ip address range.
+4) Choose "Use a NAT instance insted" in elastic ip field and select creat VPC.
+5) In Route table option select the route table with main marked "Yes" and associate it to the private subnet created. 
+   and select the route table with main marked "No" and associate it to the public subnet.
+
+Setting bastion host:
+
+1) From the services click EC2 and select launch instance.
+2) Create an EC2 instance. You can choose Amazon Linux AMI 2017.09.1(HVM), SSD volume type.
+3) In configure instance detail, in network select the created VPC and assign subnet to the public subnet. 
+   And enable Auto assign public ip option.
+4) In the security configuration make sure to open the SSH port 22 in inbound rule (to SSH linux instance). 
+   If you want to improve your security to connecting to the instance, You can also make it to listen only to your specific ip address. 
+5) Launch the instance.
+
+Setting private instance:
+
+1) Create a new EC2 instance.
+2) In configure instance detail, in network select the created VPC and assign subnet to the private subnet.
+3) In the security configuration for the inbound rules open the SSH port and select the source as bastion host. 
+4) Launch the instance.
+
+
+Securely connecting to the private EC2 instance through bastion using Putty:
+
+1) You need a private key to access the private instance and it is not advisable to store private key in your bastion host. 
+   So following steps can be followed to import the key and connect to your private instance.
+2) Convert your private key from PEM format to putty format using PuttyGen. 
+   In PuTTYGen, choose Conversions > Import Key and select your PEM-formatted private key. 
+   Enter a passphrase and then click Save private key. Save the key as a .ppk file.
+3) Open pageant icon and then click “Add Key”. Select the key you have generated using PuttyGen. 
+   After adding the key close the pageant.
+4) When configuring SSH in putty, expand SSH ->Auth and check “allow agent forwarding” box and 
+   leave the “private key file for authentication” field empty.
+5) When putty is connected to the public bastion instance. you can connect from the bastion to any other instance 
+   in the VPC without having the SSH private key on the bastion. To connect to other instances, use the following command:
+      
+                       $ ssh <ip-address>
+                
+6) Now you can see that you have connected to the private instance through bastion host.
+
+
+Reference : 
+    https://aws.amazon.com/blogs/security/securely-connect-to-linux-instances-running-in-a-private-amazon-vpc/
