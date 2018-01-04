@@ -1,0 +1,28 @@
+# Install-and-Run-R-server-on-AWS
+1) Log in to your existing AWS account.
+2) From the services click EC2 and select "Launch Instance".
+3) Choose your desired AMI. You can also select Amazon Linux AMI as it is provided at no additional cost and has a stable version of R in the repository.This AMI is maintained by AWS and includes packages and configurations that provide native integration with AWS and other software.)
+4) Choose the suitable instance type.
+5) In the configuration setting type the following code in user data field to install the R server.
+
+               #!/bin/bash
+               #install R
+
+               yum install -y R
+               wget https://download2.rstudio.org/rstudio-server-rhel-1.1.383-x86_64.rpm
+               yum install -y --nogpgcheck rstudio-server-rhel-1.1.383-x86_64.rpm
+
+               #adduser(s)
+
+               sudo useradd username
+               echo username:password | sudo chpasswd
+
+
+You can also install the latest version by changing the url. And change the Username and password as per your wish. This credentials are used to log-in into the remote R Server.
+
+6)In the security group configuration step, make sure to open SSH port 22 (to SSH Linux instance) and port 8787 for R server.
+7) Review and launch your instance.
+
+8)Finally connect to R server by
+
+              http://your-ip-address:8787 
