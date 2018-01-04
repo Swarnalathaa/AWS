@@ -1,7 +1,8 @@
-# Install-and-Run-R-server-on-AWS
 1) Log in to your existing AWS account.
 2) From the services click EC2 and select "Launch Instance".
-3) Choose your desired AMI. You can also select Amazon Linux AMI as it is provided at no additional cost and has a stable version of R in the repository.This AMI is maintained by AWS and includes packages and configurations that provide native integration with AWS and other software.)
+3) Choose your desired AMI. You can also select Amazon Linux AMI as it is provided at no additional cost 
+   and has a stable version of R in the repository.This AMI is maintained by AWS and includes packages 
+   and configurations that provide native integration with AWS and other software.)
 4) Choose the suitable instance type.
 5) In the configuration setting type the following code in user data field to install the R server.
 
