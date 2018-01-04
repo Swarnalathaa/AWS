@@ -19,10 +19,11 @@
                echo username:password | sudo chpasswd
 
 
-You can also install the latest version by changing the url. And change the Username and password as per your wish. This credentials are used to log-in into the remote R Server.
+You can also install the latest version by changing the url. And change the Username and password as per your wish. 
+This credentials are used to log-in into the remote R Server.
 
 6)In the security group configuration step, make sure to open SSH port 22 (to SSH Linux instance) and port 8787 for R server.
-7) Review and launch your instance.
+7)Review and launch your instance.
 
 8)Finally connect to R server by
 
